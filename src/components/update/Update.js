@@ -33,7 +33,6 @@ function Update({ status, handleClose, handleChange,
                 placeholder="Enter Phone Number"
                 name="phoneNo"
                 value={phoneNo || ''}
-                pattern="[789][0-9]{9}"
                 onChange={handleChange}
               />
             </Form.Group>

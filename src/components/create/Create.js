@@ -28,11 +28,11 @@ function Create({ status, handleClose,
                         <Form.Label>Phone Number</Form.Label>
                         <Form.Control
                             required
+                            type="text"
                             placeholder="Enter Phone Number"
                             name="phoneNo"
                             value={phoneNo || ''}
                             onChange={handleChange}
-                            pattern="[789][0-9]{9}"
                         />
                     </Form.Group>
                 </Form>

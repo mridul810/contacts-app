@@ -54,7 +54,7 @@ function Home() {
       fullname,
       phoneNo
     };
-    if (state.fullname !== '' && state.phoneNo !== '') {
+    if (state.fullname !== '' && state.fullname.length > 3 && state.phoneNo !== '' && state.phoneNo.length > 8 && state.phoneNo.length <= 10) {
       setState({ ...state, loading: true });
       dispatch(addItem(obj));
       setTimeout(() => {
@@ -63,14 +63,21 @@ function Home() {
           toast.success("Added Successfully");
         }
       }, 1000);
+    } else if(state.fullname.length <= 3) {
+      toast.warning("Full Name should be minimum 4 characters long");
+    }
+    else if(state.phoneNo.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/) == null){
+      toast.warning("Phone number should be a number");
+    } else if(state.phoneNo.length < 8 || state.phoneNo.length > 10) {
+      toast.warning("Phone number should be 10 characters long");
     } else {
-      toast.warning("Full Name & Phone Number is Empty");
+      toast.warning("Full Name or Phone Number should not be empty");
     }
     setStatus({ ...status, add: false });
   }
   const submitUpdateForm = e => {
     e.preventDefault();
-
+    if (state.fullname !== '' && state.fullname.length > 3 && state.phoneNo !== '' && state.phoneNo.length > 8 && state.phoneNo.length <= 10) {
     setState({ ...state, loading: true });
     dispatch(updateItem(state));
     setTimeout(() => {
@@ -79,6 +86,16 @@ function Home() {
         toast.success("Successfully Updated");
       }
     }, 1000);
+  }else if(state.fullname.length <= 3) {
+    toast.warning("Full Name should be minimum 4 characters long");
+  }
+  else if(state.phoneNo.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/) == null){
+    toast.warning("Phone number should be a number");
+  } else if(state.phoneNo.length < 8 || state.phoneNo.length > 10) {
+    toast.warning("Phone number should be 10 characters long");
+  } else {
+    toast.warning("Full Name or Phone Number should not be empty");
+  }
     setStatus({ ...status, edit: false });
   };
   const onHandleEdit = (list) => {
